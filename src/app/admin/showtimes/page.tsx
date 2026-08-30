@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { collection, getDocs, addDoc, deleteDoc, doc, query, orderBy } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Plus, Trash2, X, CalendarDays, Clock, MapPin, Film } from "lucide-react";
@@ -148,28 +148,45 @@ export default function AdminShowtimesPage() {
                   <td colSpan={6} className="py-8 text-center text-gray-500">Chưa có suất chiếu nào</td>
                 </tr>
               ) : (
-                showtimes.map((st) => (
-                  <tr key={st.id} className="border-b border-surface-border/50 hover:bg-white/5 transition-colors">
-                    <td className="py-4 text-sm text-white font-medium flex items-center gap-2">
-                      <Film className="w-4 h-4 text-primary" /> {st.movieTitle}
-                    </td>
-                    <td className="py-4 text-sm text-gray-300">
-                      <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-gray-500" /> {st.theaterName}</div>
-                    </td>
-                    <td className="py-4 text-sm text-gray-300">{st.format}</td>
-                    <td className="py-4 text-sm text-white font-bold">
-                      {st.date} <span className="text-primary ml-2">{st.time}</span>
-                    </td>
-                    <td className="py-4 text-sm text-center">
-                      <span className="px-2 py-1 bg-surface-border rounded text-xs font-mono">{st.bookedSeats?.length || 0} / 120</span>
-                    </td>
-                    <td className="py-4 text-right">
-                      <button onClick={() => handleDelete(st.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-500/10 rounded transition-colors" title="Xóa suất chiếu">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))
+                (() => {
+                  const grouped = showtimes.reduce((acc: any, st: any) => {
+                    if (!acc[st.theaterName]) acc[st.theaterName] = [];
+                    acc[st.theaterName].push(st);
+                    return acc;
+                  }, {});
+
+                  return Object.keys(grouped).map(theater => (
+                    <React.Fragment key={theater}>
+                      <tr className="bg-surface-border/30">
+                        <td colSpan={6} className="py-3 px-4 font-bold text-primary uppercase tracking-widest flex items-center gap-2">
+                          <MapPin className="w-5 h-5" /> {theater}
+                        </td>
+                      </tr>
+                      {grouped[theater].map((st: any) => (
+                        <tr key={st.id} className="border-b border-surface-border/50 hover:bg-white/5 transition-colors">
+                          <td className="py-4 px-4 text-sm text-white font-medium flex items-center gap-2">
+                            <Film className="w-4 h-4 text-gray-500" /> {st.movieTitle}
+                          </td>
+                          <td className="py-4 px-4 text-sm text-gray-400">
+                            {st.theaterName}
+                          </td>
+                          <td className="py-4 px-4 text-sm text-gray-300">{st.format}</td>
+                          <td className="py-4 px-4 text-sm text-white font-bold">
+                            {st.date} <span className="text-primary ml-2">{st.time}</span>
+                          </td>
+                          <td className="py-4 px-4 text-sm text-center">
+                            <span className="px-2 py-1 bg-surface-border rounded text-xs font-mono">{st.bookedSeats?.length || 0} / 120</span>
+                          </td>
+                          <td className="py-4 px-4 text-right">
+                            <button onClick={() => handleDelete(st.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-500/10 rounded transition-colors" title="Xóa suất chiếu">
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </React.Fragment>
+                  ));
+                })()
               )}
             </tbody>
           </table>
