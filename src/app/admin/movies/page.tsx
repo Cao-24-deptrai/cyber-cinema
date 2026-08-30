@@ -23,8 +23,17 @@ export default function AdminMoviesPage() {
     ageRestriction: "",
     posterUrl: "",
     bannerUrl: "",
-    synopsis: ""
+    synopsis: "",
+    trailerId: ""
   });
+
+  const extractYoutubeId = (url: string) => {
+    if (!url) return "";
+    // Xử lý các dạng link: https://www.youtube.com/watch?v=XYZ, https://youtu.be/XYZ, hoặc chỉ truyền ID "XYZ"
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : url;
+  };
 
   const fetchMovies = async () => {
     setLoading(true);
@@ -57,11 +66,16 @@ export default function AdminMoviesPage() {
     e.preventDefault();
     const loadingToast = toast.loading("Đang lưu thông tin phim...");
     try {
+      const processedData = {
+        ...formData,
+        trailerId: extractYoutubeId(formData.trailerId)
+      };
+
       if (editingId) {
-        await updateDoc(doc(db, "movies", editingId), formData);
+        await updateDoc(doc(db, "movies", editingId), processedData);
         toast.success("Cập nhật phim thành công!");
       } else {
-        await addDoc(collection(db, "movies"), formData);
+        await addDoc(collection(db, "movies"), processedData);
         toast.success("Đã thêm phim mới!");
       }
       setIsModalOpen(false);
@@ -206,6 +220,10 @@ export default function AdminMoviesPage() {
                   <div>
                     <label className="block text-xs text-gray-400 uppercase font-bold mb-1">Link Ảnh Banner ngang</label>
                     <input required type="text" value={formData.bannerUrl} onChange={e => setFormData({...formData, bannerUrl: e.target.value})} className="w-full bg-background border border-surface-border text-white p-2.5 rounded focus:border-primary outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-gray-400 uppercase font-bold mb-1">Link Youtube Trailer</label>
+                    <input type="text" value={formData.trailerId} onChange={e => setFormData({...formData, trailerId: e.target.value})} className="w-full bg-background border border-surface-border text-white p-2.5 rounded focus:border-primary outline-none" placeholder="Nhập Link hoặc ID video (Vd: dQw4w9WgXcQ)" />
                   </div>
                   <div>
                     <label className="block text-xs text-gray-400 uppercase font-bold mb-1">Tóm tắt nội dung</label>
