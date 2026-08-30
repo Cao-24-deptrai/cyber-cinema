@@ -51,12 +51,12 @@ export default function AdminMoviesPage() {
   const handleOpenModal = (movie: any = null) => {
     if (movie) {
       setEditingId(movie.id);
-      setFormData(movie);
+      setFormData({ ...movie, trailerId: movie.trailerId || "" });
     } else {
       setEditingId(null);
       setFormData({
         title: "", originalTitle: "", genre: "", duration: "",
-        director: "", rating: "", ageRestriction: "", posterUrl: "", bannerUrl: "", synopsis: ""
+        director: "", rating: "", ageRestriction: "", posterUrl: "", bannerUrl: "", synopsis: "", trailerId: ""
       });
     }
     setIsModalOpen(true);
