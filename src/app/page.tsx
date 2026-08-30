@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Play, Ticket } from "lucide-react";
+import { Play, Ticket, ChevronRight } from "lucide-react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import PlayTrailerButton from "@/components/PlayTrailerButton";
 
 export const dynamic = 'force-dynamic';
 
@@ -50,10 +51,7 @@ export default async function Home() {
                 <Ticket className="w-5 h-5" />
                 Đặt vé ngay
               </Link>
-              <button className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-transparent text-white font-bold rounded-sm border border-white/20 hover:bg-white/10 transition-all uppercase tracking-wider">
-                <Play className="w-5 h-5" />
-                Xem Trailer
-              </button>
+              <PlayTrailerButton trailerId={featuredMovie.trailerId} />
             </div>
           </div>
         </section>

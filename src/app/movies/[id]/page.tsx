@@ -3,6 +3,7 @@ import { Play, Calendar, Clock, Star, MapPin } from "lucide-react";
 import Link from "next/link";
 import { doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import PlayTrailerButton from "@/components/PlayTrailerButton";
 
 export const dynamic = 'force-dynamic';
 
@@ -56,9 +57,7 @@ export default async function MovieDetailsPage({ params }: { params: Promise<{ i
           style={{ backgroundImage: `url(${movie.bannerUrl})` }}
         />
         <div className="absolute inset-0 z-20 flex items-center justify-center">
-           <button className="w-20 h-20 rounded-full bg-primary/80 text-white flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300 box-glow backdrop-blur-md">
-             <Play className="w-8 h-8 ml-1" fill="currentColor" />
-           </button>
+          <PlayTrailerButton trailerId={movie.trailerId} variant="circle" />
         </div>
       </div>
 
