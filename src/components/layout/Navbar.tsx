@@ -29,9 +29,9 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <button className="text-gray-400 hover:text-white transition-colors">
+          <Link href="/movies" className="text-gray-400 hover:text-primary transition-colors">
             <Search className="w-5 h-5" />
-          </button>
+          </Link>
           
           {user ? (
             <div className="relative">
