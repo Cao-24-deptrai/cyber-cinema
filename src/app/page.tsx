@@ -65,24 +65,13 @@ export default async function Home() {
           <h2 className="text-3xl font-bold uppercase tracking-widest text-glow">
             Đang chiếu
           </h2>
-          <button className="text-primary hover:text-primary-glow font-bold uppercase tracking-widest text-sm flex items-center gap-2 transition-all">
-            Xem tất cả <ChevronRight className="w-4 h-4" />
-          </button>
+          <Link href="/movies" className="text-primary hover:text-primary-glow font-bold uppercase tracking-widest text-sm transition-all">
+            Xem tất cả &rarr;
+          </Link>
         </div>
 
-        {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((n) => (
-              <div key={n} className="flex flex-col gap-4 animate-pulse">
-                <div className="bg-surface-border aspect-[2/3] rounded-lg"></div>
-                <div className="h-6 bg-surface-border rounded w-3/4"></div>
-                <div className="h-4 bg-surface-border rounded w-1/2"></div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {movies.map((movie) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {movies.map((movie) => (
             <Link href={`/movies/${movie.id}`} key={movie.id} className="group relative rounded-md overflow-hidden bg-surface border border-surface-border cursor-pointer hover:border-primary/50 transition-all duration-300">
               <div className="aspect-[2/3] bg-gray-900 relative">
                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent z-10" />
