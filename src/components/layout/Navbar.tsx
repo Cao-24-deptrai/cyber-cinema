@@ -1,14 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Film, Search, Menu, X, LogOut, ChevronDown, ArrowLeftRight, ShieldCheck } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  // Ẩn hoàn toàn Navbar của người dùng khi đang ở trang Admin
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "admin@cyberplex.com";
   const isAdmin = Boolean(user && (user.email === adminEmail || user.email?.includes("admin")));
@@ -37,11 +44,11 @@ export default function Navbar() {
             <Search className="w-5 h-5" />
           </Link>
           
-          {/* Nút chuyển sang giao diện Admin (khi user là Admin) */}
+          {/* NÚT DUY NHẤT ĐỔI GIAO DIỆN ADMIN NẰM KẾ NÚT TÀI KHOẢN */}
           {isAdmin && (
             <Link 
               href="/admin" 
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-primary/20 hover:bg-primary text-primary hover:text-white border border-primary/50 rounded-md text-xs font-bold uppercase tracking-wider transition-all box-glow"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/20 hover:bg-primary text-primary hover:text-white border border-primary/50 rounded-md text-xs font-bold uppercase tracking-wider transition-all box-glow"
               title="Chuyển sang giao diện Quản trị viên (Admin)"
             >
               <ArrowLeftRight className="w-3.5 h-3.5" />

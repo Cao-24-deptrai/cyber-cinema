@@ -1,6 +1,16 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { Film } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // Ẩn Footer khi đang ở trang Admin
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <footer className="border-t border-surface-border bg-surface mt-auto">
       <div className="container mx-auto px-4 py-8">
