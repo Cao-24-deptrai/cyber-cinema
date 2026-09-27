@@ -80,6 +80,9 @@ export default async function MovieDetailsPage({ params }: { params: Promise<{ i
               <div className="flex items-center gap-2"><Star className="w-4 h-4 text-yellow-500" /><span><strong className="text-white text-base">{movie.rating}</strong> / 10</span></div>
               <div><span className="text-gray-500">Đạo diễn:</span> <span className="text-white">{movie.director}</span></div>
             </div>
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <PlayTrailerButton trailerId={movie.trailerId} variant="default" />
+            </div>
             <div className="mb-8">
               <h3 className="text-lg font-bold text-white mb-2 border-b border-surface-border pb-2 inline-block">Nội dung phim</h3>
               <p className="text-gray-400 leading-relaxed">{movie.synopsis}</p>
