@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
+import { MOCK_MOVIES, generateMockShowtimesList } from "@/data/mock";
+
 const ROWS = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K"];
 const SEATS_PER_ROW = 12;
 
@@ -45,10 +47,33 @@ export default function SeatSelectionPage({ params }: { params: Promise<{ showti
           const mDoc = await getDoc(doc(db, "movies", stData.movieId));
           if (mDoc.exists()) {
             setMovie({ id: mDoc.id, ...mDoc.data() });
+          } else {
+            const fallbackMovie = MOCK_MOVIES.find(m => m.id === stData.movieId) || MOCK_MOVIES[0];
+            setMovie(fallbackMovie);
           }
         }
         setLoading(false);
+      } else {
+        // Fallback sang dữ liệu mẫu khi suất chiếu chưa được lưu trong Firebase
+        const mockList = generateMockShowtimesList();
+        const fallbackSt = mockList.find(s => s.id === showtimeId) || mockList[0];
+        if (fallbackSt) {
+          setShowtime(fallbackSt);
+          setBookedSeats(fallbackSt.bookedSeats || []);
+          const fallbackMovie = MOCK_MOVIES.find(m => m.id === fallbackSt.movieId) || MOCK_MOVIES[0];
+          setMovie(fallbackMovie);
+          setLoading(false);
+        }
       }
+    }, (error) => {
+      console.warn("Firestore showtime error, using mock fallback:", error);
+      const mockList = generateMockShowtimesList();
+      const fallbackSt = mockList.find(s => s.id === showtimeId) || mockList[0];
+      setShowtime(fallbackSt);
+      setBookedSeats(fallbackSt.bookedSeats || []);
+      const fallbackMovie = MOCK_MOVIES.find(m => m.id === fallbackSt.movieId) || MOCK_MOVIES[0];
+      setMovie(fallbackMovie);
+      setLoading(false);
     });
 
     return () => unsubscribe();

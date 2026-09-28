@@ -65,13 +65,101 @@ export const MOCK_MOVIES = [
   }
 ];
 
+export const MOCK_THEATERS = [
+  {
+    id: "cyberplex-downtown",
+    name: "CYBERPLEX DOWNTOWN",
+    city: "TP. Hồ Chí Minh",
+    district: "Quận 1",
+    address: "Tầng 5, TTTM CyberCenter, 128 Nguyễn Du, Bến Nghé, Quận 1, TP.HCM",
+    phone: "1900 2077 (Nhánh 1)",
+    email: "downtown@cyberplex.vn",
+    imageUrl: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop",
+    formats: ["IMAX Laser 3D", "Dolby Atmos", "2D Standard", "VIP CyberLounge"],
+    totalScreens: 8,
+    totalSeats: 1250,
+    amenities: [
+      "Bãi đỗ xe ô tô/xe máy rộng rãi",
+      "Khu ẩm thực CyberBites",
+      "Ghế đôi Sweetbox",
+      "Quầy Bar CyberLounge",
+      "Phòng chiếu VIP riêng biệt",
+      "Cổng soát vé tự động QR"
+    ],
+    mapUrl: "https://maps.google.com/?q=128+Nguyen+Du+Ben+Nghe+District+1+Ho+Chi+Minh"
+  },
+  {
+    id: "cyberplex-neon-city",
+    name: "CYBERPLEX NEON CITY",
+    city: "TP. Hồ Chí Minh",
+    district: "TP. Thủ Đức",
+    address: "Tầng 4, Neon Mall, 88 Song Hành, An Phú, TP. Thủ Đức, TP.HCM",
+    phone: "1900 2077 (Nhánh 2)",
+    email: "neoncity@cyberplex.vn",
+    imageUrl: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop",
+    formats: ["4DX Motion", "ScreenX 270°", "2D Standard"],
+    totalScreens: 6,
+    totalSeats: 980,
+    amenities: [
+      "Bãi đỗ xe tầng hầm liên thông",
+      "CyberGaming Arcade",
+      "Ghế đôi Sweetbox",
+      "Check-in QR tự động",
+      "Quầy bắp nước tiện lợi"
+    ],
+    mapUrl: "https://maps.google.com/?q=88+Song+Hanh+An+Phu+Thu+Duc+Ho+Chi+Minh"
+  },
+  {
+    id: "cyberplex-mega-mall",
+    name: "CYBERPLEX MEGA MALL",
+    city: "TP. Hồ Chí Minh",
+    district: "Quận 7",
+    address: "Tầng 6, Crescent Mega Plaza, 101 Tôn Dật Tiên, Tân Phú, Quận 7, TP.HCM",
+    phone: "1900 2077 (Nhánh 3)",
+    email: "megamall@cyberplex.vn",
+    imageUrl: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?q=80&w=1200&auto=format&fit=crop",
+    formats: ["IMAX Laser 3D", "4DX Motion", "Dolby Atmos", "2D Standard"],
+    totalScreens: 10,
+    totalSeats: 1600,
+    amenities: [
+      "Bãi giữ xe sức chứa 5000 xe",
+      "Quầy bắp rang CyberBites 12 vị",
+      "Phòng chiếu riêng CyberKids",
+      "Khu mua sắm liên thông",
+      "Khu chờ sang trọng"
+    ],
+    mapUrl: "https://maps.google.com/?q=101+Ton+Dat+Tien+Tan+Phu+District+7+Ho+Chi+Minh"
+  },
+  {
+    id: "cyberplex-galaxy",
+    name: "CYBERPLEX GALAXY",
+    city: "Hà Nội",
+    district: "Cầu Giấy",
+    address: "Tầng 5, Tòa tháp Galaxy Horizon, 241 Xuân Thủy, Cầu Giấy, Hà Nội",
+    phone: "1900 2077 (Nhánh 4)",
+    email: "galaxy.hn@cyberplex.vn",
+    imageUrl: "https://images.unsplash.com/photo-1595769816263-9b910be24d5f?q=80&w=1200&auto=format&fit=crop",
+    formats: ["IMAX Laser 3D", "ScreenX", "Dolby Atmos", "VIP CyberLounge"],
+    totalScreens: 9,
+    totalSeats: 1420,
+    amenities: [
+      "Bãi đỗ xe thông minh",
+      "Quầy CyberLounge Skyview",
+      "Ghế Sweetbox cao cấp",
+      "Máy in vé & soát vé tự động QR",
+      "Phòng tiệc sinh nhật & sự kiện"
+    ],
+    mapUrl: "https://maps.google.com/?q=241+Xuan+Thuy+Cau+Giay+Ha+Noi"
+  }
+];
+
 export const MOCK_SHOWTIMES = [
   {
     theaterName: "CYBERPLEX DOWNTOWN",
-    address: "Khu công nghệ cao, Quận 1",
+    address: "Khu công nghệ cao, 128 Nguyễn Du, Bến Nghé, Quận 1, TP.HCM",
     formats: [
       {
-        name: "IMAX 3D",
+        name: "IMAX Laser 3D",
         times: ["18:30", "21:00", "23:30"]
       },
       {
@@ -82,10 +170,10 @@ export const MOCK_SHOWTIMES = [
   },
   {
     theaterName: "CYBERPLEX NEON CITY",
-    address: "Tầng 5, TTTM Neon, Quận 2",
+    address: "Tầng 4, Neon Mall, 88 Song Hành, An Phú, TP. Thủ Đức, TP.HCM",
     formats: [
       {
-        name: "4DX",
+        name: "4DX Motion",
         times: ["19:00", "21:30"]
       },
       {
@@ -93,5 +181,67 @@ export const MOCK_SHOWTIMES = [
         times: ["18:00", "20:30", "23:00"]
       }
     ]
+  },
+  {
+    theaterName: "CYBERPLEX MEGA MALL",
+    address: "Tầng 6, Crescent Mega Plaza, 101 Tôn Dật Tiên, Tân Phú, Quận 7, TP.HCM",
+    formats: [
+      {
+        name: "IMAX Laser 3D",
+        times: ["17:30", "20:15", "22:45"]
+      },
+      {
+        name: "Dolby Atmos",
+        times: ["18:15", "21:00"]
+      }
+    ]
+  },
+  {
+    theaterName: "CYBERPLEX GALAXY",
+    address: "Tầng 5, Tòa tháp Galaxy Horizon, 241 Xuân Thủy, Cầu Giấy, Hà Nội",
+    formats: [
+      {
+        name: "IMAX Laser 3D",
+        times: ["18:00", "20:45", "23:15"]
+      },
+      {
+        name: "2D Standard",
+        times: ["17:15", "19:30", "21:45"]
+      }
+    ]
   }
 ];
+
+// Helper sinh danh sách suất chiếu mẫu theo ngày
+export function generateMockShowtimesList(targetDateStr?: string) {
+  const result: any[] = [];
+  let counter = 1;
+
+  MOCK_MOVIES.forEach((movie) => {
+    MOCK_SHOWTIMES.forEach((theater) => {
+      theater.formats.forEach((fmt) => {
+        fmt.times.forEach((t) => {
+          result.push({
+            id: `st_${counter++}`,
+            movieId: movie.id,
+            movieTitle: movie.title,
+            posterUrl: movie.posterUrl,
+            rating: movie.rating,
+            ageRestriction: movie.ageRestriction,
+            duration: movie.duration,
+            genre: movie.genre,
+            theaterName: theater.theaterName,
+            address: theater.address,
+            format: fmt.name,
+            date: targetDateStr || "28/08",
+            time: t,
+            bookedSeats: ["C5", "C6", "D7"] // Vài ghế mẫu đã đặt
+          });
+        });
+      });
+    });
+  });
+
+  return result;
+}
+
