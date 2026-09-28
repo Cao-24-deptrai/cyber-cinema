@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { Film } from "lucide-react";
 
 export default function Footer() {
@@ -15,18 +16,18 @@ export default function Footer() {
     <footer className="border-t border-surface-border bg-surface mt-auto">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Film className="w-6 h-6 text-primary" />
+          <Link href="/" className="flex items-center gap-2 group">
+            <Film className="w-6 h-6 text-primary group-hover:text-primary-glow transition-colors" />
             <span className="text-lg font-bold tracking-wider text-white">
               CYBER<span className="text-primary">PLEX</span>
             </span>
-          </div>
+          </Link>
           
-          <div className="flex gap-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">Về chúng tôi</a>
-            <a href="#" className="hover:text-white transition-colors">Điều khoản</a>
-            <a href="#" className="hover:text-white transition-colors">Bảo mật</a>
-            <a href="#" className="hover:text-white transition-colors">Hỗ trợ</a>
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
+            <Link href="/about" className="hover:text-white transition-colors">Về chúng tôi</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Điều khoản</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Bảo mật</Link>
+            <Link href="/support" className="hover:text-white transition-colors">Hỗ trợ</Link>
           </div>
         </div>
         
