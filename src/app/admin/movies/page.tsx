@@ -24,7 +24,8 @@ export default function AdminMoviesPage() {
     posterUrl: "",
     bannerUrl: "",
     synopsis: "",
-    trailerId: ""
+    trailerId: "",
+    releaseDate: ""
   });
 
   const extractYoutubeId = (url: string) => {
@@ -51,12 +52,16 @@ export default function AdminMoviesPage() {
   const handleOpenModal = (movie: any = null) => {
     if (movie) {
       setEditingId(movie.id);
-      setFormData({ ...movie, trailerId: movie.trailerId || "" });
+      setFormData({ 
+        ...movie, 
+        trailerId: movie.trailerId || "",
+        releaseDate: movie.releaseDate || ""
+      });
     } else {
       setEditingId(null);
       setFormData({
         title: "", originalTitle: "", genre: "", duration: "",
-        director: "", rating: "", ageRestriction: "", posterUrl: "", bannerUrl: "", synopsis: "", trailerId: ""
+        director: "", rating: "", ageRestriction: "", posterUrl: "", bannerUrl: "", synopsis: "", trailerId: "", releaseDate: ""
       });
     }
     setIsModalOpen(true);
@@ -193,6 +198,10 @@ export default function AdminMoviesPage() {
                   <div>
                     <label className="block text-xs text-gray-400 uppercase font-bold mb-1">Đạo diễn</label>
                     <input type="text" value={formData.director} onChange={e => setFormData({...formData, director: e.target.value})} className="w-full bg-background border border-surface-border text-white p-2.5 rounded focus:border-primary outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-gray-400 uppercase font-bold mb-1">Ngày phát hành / Khởi chiếu</label>
+                    <input type="date" value={formData.releaseDate || ""} onChange={e => setFormData({...formData, releaseDate: e.target.value})} className="w-full bg-background border border-surface-border text-white p-2.5 rounded focus:border-primary outline-none" />
                   </div>
                 </div>
 
